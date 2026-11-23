@@ -1,0 +1,581 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap');
+
+/* Configurações gerais da página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f0b0e;
+    color: #f5e6d3;
+    font-family: Georgia, serif;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #d8a56d;
+    font-weight: normal;
+    letter-spacing: 2px;
+    line-height: 1.3;
+}
+
+main {
+    text-align: center;
+    max-width: 700px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #bba99a;
+    line-height: 1.8;
+}
+.intro {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b89568;
+    opacity: 0.8;
+}
+#startButton {
+    margin-top: 15px;
+    padding: 14px 32px;
+
+    background-color: transparent;
+    border: 1px solid #d8a56d;
+    border-radius: 30px;
+
+    color: #d8a56d;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+#startButton:hover {
+    background-color: #d8a56d;
+    color: #0f0b0e;
+    transform: scale(1.05);
+}
+#startButton {
+    box-shadow: 0 0 0 rgba(216, 165, 109, 0);
+}
+
+#startButton:hover {
+    box-shadow: 0 0 20px rgba(216, 165, 109, 0.20);
+}
+.hidden {
+    display: none;
+}
+
+/* Fade-in usado quando uma cena passa a ser exibida */
+@keyframes sceneFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* =========================
+   GALERIA DE MEMÓRIAS
+========================= */
+
+#galleryScene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+    padding: 30px 20px;
+
+    background:
+        radial-gradient(circle at center, #29202b 0%, #120e14 65%, #080608 100%);
+
+    color: #f5e6d3;
+    overflow: hidden;
+    z-index: 10;
+
+    animation: sceneFadeIn 1.5s ease;
+}
+
+#galleryScene.hidden {
+    display: none;
+}
+
+#galleryScene h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    text-align: center;
+    color: #e8c49a;
+
+    text-shadow: 0 0 20px rgba(216, 165, 109, 0.15);
+}
+
+/* Moldura da fotografia */
+
+#photoContainer {
+    position: relative;
+
+    width: min(90vw, 850px);
+    height: 75vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    margin: 0 auto;
+
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(216, 165, 109, 0.25);
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 35px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(216, 165, 109, 0.04);
+
+    overflow: hidden;
+}
+/* Fotografia */
+
+#currentPhoto {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+/* Controles */
+
+#galleryControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+#galleryControls button {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(216, 165, 109, 0.08);
+    border: 1px solid rgba(216, 165, 109, 0.4);
+    border-radius: 50%;
+
+    color: #e8c49a;
+    font-size: 24px;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#galleryControls button:hover {
+    background: rgba(216, 165, 109, 0.2);
+    border-color: #d8a56d;
+
+    transform: scale(1.08);
+
+    box-shadow: 0 0 18px rgba(216, 165, 109, 0.12);
+}
+
+#galleryControls button:active {
+    transform: scale(0.95);
+}
+
+/* Responsividade */
+
+@media (max-width: 700px) {
+
+    #galleryScene {
+        gap: 20px;
+        padding: 20px 12px;
+    }
+
+    #photoContainer {
+        width: 92vw;
+        height: 65vh;
+        padding: 6px;
+    }
+
+    #galleryControls {
+        gap: 25px;
+    }
+
+    #galleryControls button {
+        width: 46px;
+        height: 46px;
+        font-size: 21px;
+    }
+}
+
+/* =========================
+   CAPA INICIAL
+========================= */
+
+#cover {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    padding: 0;
+    display: block;
+
+    background: #000;
+    overflow: hidden;
+    z-index: 20;
+
+    transition: opacity 1s ease;
+}
+
+/* Efeito de sumiço da capa (classe adicionada pelo JS) */
+#cover.fade-out {
+    opacity: 0;
+}
+
+#cover img {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;
+    display: block;
+    animation: cameraMove 20s ease-in-out infinite alternate;
+}
+
+@keyframes cameraMove {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+/* movimento suave da vegetação com o vento */
+@keyframes windsway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+#enterButton {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    padding: 14px 55px;
+
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50px;
+
+    color: white;
+    font-size: 16px;
+    letter-spacing: 4px;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+#enterButton:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.12);
+
+    transform: translateX(-50%) scale(1.05);
+}
+
+/* Efeito ao clicar */
+#enterButton:active {
+    transform: translateX(-50%) scale(0.97);
+}
+#matrixCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+    pointer-events: none;
+
+    opacity: 0;
+}
+/* =========================
+   PÁGINA VIÚVA NEGRA
+========================= */
+
+#musicScene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000000;
+    overflow: hidden;
+    color: #f2f2f2;
+
+    animation: sceneFadeIn 1.5s ease;
+}
+
+#albumPage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Título */
+
+#albumTitle {
+    margin: 0 0 5px 0;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 5vw, 58px);
+    letter-spacing: 7px;
+    font-weight: normal;
+    color: #eeeeee;
+    text-align: center;
+}
+
+/* Arte */
+#albumArtwork::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../assets/capa/quarto.gif");
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) brightness(0.45);
+    transform: scale(1.1);
+}
+#albumArtwork {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+#albumArtwork img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* Letras */
+
+#lyricsContainer {
+    position: absolute;
+    /* AJUSTE aqui para encaixar na janela do GIF */
+    left: 50%;
+    top: 22%;
+    width: 30%;
+    height: 24%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+    pointer-events: none;
+}
+
+#lyrics {
+    width: 100%;
+    text-align: center;
+    white-space: pre-line;
+
+    font-family: 'Gaegu', cursive;
+    font-weight: 300;
+    font-size: clamp(14px, 1.8vw, 24px);
+    letter-spacing: 1px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+#lyrics.visible {
+    opacity: 1;
+}
+
+/* =========================
+   TRANSIÇÃO PARA A CARTA
+========================= */
+
+#galleryScene {
+    transition: opacity 1.5s ease;
+}
+
+#galleryScene.scene-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#finalButton {
+    margin-top: 5px;
+    padding: 12px 34px;
+
+    background: rgba(216, 165, 109, 0.08);
+    border: 1px solid rgba(216, 165, 109, 0.5);
+    border-radius: 40px;
+
+    color: #e8c49a;
+    font-family: 'Gaegu', cursive;
+    font-size: 20px;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#finalButton.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#finalButton:hover {
+    background: rgba(216, 165, 109, 0.2);
+    box-shadow: 0 0 20px rgba(216, 165, 109, 0.2);
+}
+
+/* =========================
+   CARTA FINAL
+========================= */
+
+#letterScene {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(circle at center, #29202b 0%, #120e14 65%, #080608 100%);
+
+    z-index: 30;
+    animation: sceneFadeIn 2s ease;
+}
+
+#letterScene.hidden {
+    display: none;
+}
+
+#letterPaper {
+    width: min(92vw, 640px);
+    max-height: 85vh;
+    overflow-y: auto;
+
+    padding: 44px 38px;
+
+    background: linear-gradient(160deg, #f6ecd6 0%, #efe0c2 100%);
+    border-radius: 6px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(216, 165, 109, 0.08);
+
+    font-family: 'Gaegu', cursive;
+    color: #4a3a2a;
+    text-align: left;
+}
+
+#letterPaper h3 {
+    font-weight: 300;
+    font-size: clamp(26px, 4vw, 34px);
+    color: #6b4a2b;
+    margin-bottom: 6px;
+}
+
+#letterPaper p {
+    margin-top: 18px;
+    font-size: clamp(19px, 2.7vw, 24px);
+    line-height: 1.7;
+    color: #4a3a2a;
+}
+
+#letterPaper .letter-sign {
+    margin-top: 34px;
+    text-align: right;
+    color: #6b4a2b;
+}
+
+/* cada linha da carta aparece uma por vez (o JS define o atraso) */
+.letter-line {
+    opacity: 0;
+}
+
+.letter-line.reveal {
+    animation: sceneFadeIn 1.8s ease forwards;
+}
